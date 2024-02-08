@@ -1,0 +1,33 @@
+@import './media-mixins.scss';
+
+@mixin light-theme {
+  --color-bg: #fff;
+  --color-bg-secondary: #e8eef1;
+  --color-text: #292929;
+  --color-text-reverse: #f4eee0;
+
+  --color-light-grey: #e6e6e6;
+  --color-dark-grey: #292929;
+  --color-grey-text: #7a7e86;
+
+  --color-dark-button: #292929;
+  --color-primary-button: #1294f2;
+  --color-select-active: #9f9f9f;
+  --color-button: #ed0226;
+}
+
+@mixin dark-theme {
+  --color-bg: #4f4557;
+  --color-bg-secondary: #393646;
+  --color-text: #f4eee0;
+  --color-text-reverse: #292929;
+
+  --color-light-grey: #e6e6e6;
+  --color-dark-grey: #292929;
+  --color-grey-text: #f4eee0;
+
+  --color-dark-button: #f4eee0;
+  --color-primary-button: #1294f2;
+  --color-select-active: #9f9f9f;
+  --color-button: #ed0226;
+}

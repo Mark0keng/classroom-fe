@@ -1,0 +1,39 @@
+@import '@styles/base.scss';
+
+.card {
+  padding: 32px;
+  background-color: var(--color-bg);
+  border-radius: 20px;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+.input {
+  @include directionY;
+  gap: 32px;
+  .formControl {
+    .label {
+      @include label;
+    }
+    .input {
+      @include input;
+    }
+
+    .textarea {
+      @include input;
+      height: 5%;
+    }
+  }
+}
+
+.button {
+  @include button;
+}
+
+.error {
+  @include alert;
+}

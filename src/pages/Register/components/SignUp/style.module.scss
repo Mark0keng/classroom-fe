@@ -1,0 +1,46 @@
+@import '@styles/base.scss';
+
+.form {
+  padding-bottom: 24px;
+  .label {
+    font-size: 14px;
+    margin: 0;
+  }
+  .input {
+    box-sizing: border-box;
+    width: 100%;
+    height: 36px;
+    border-radius: 5px;
+    padding-left: 12px;
+  }
+}
+
+.submitSection {
+  @include directionX;
+  justify-content: space-between;
+
+  .prev {
+    width: 25%;
+    text-align: center;
+    padding: 10px 15px;
+    background-color: var(--color-text-reverse);
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  .next {
+    width: 25%;
+    text-align: center;
+    padding: 10px 15px;
+    color: var(--color-text-reverse);
+    background-color: var(--color-dark-button);
+    border-radius: 10px;
+    cursor: pointer;
+  }
+}
+
+.error {
+  position: absolute;
+  bottom: 40px;
+  right: 40px;
+}

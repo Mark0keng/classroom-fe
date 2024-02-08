@@ -1,0 +1,10 @@
+@import '@styles/base.scss';
+
+.layout {
+  margin-top: 10px;
+  padding-left: 12%;
+  padding-right: 10%;
+  @include apply-at-md-size {
+    padding-left: 25%;
+  }
+}

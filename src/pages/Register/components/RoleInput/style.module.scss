@@ -1,0 +1,29 @@
+@import '@styles/base.scss';
+
+.roleInput {
+  @include directionY;
+  gap: 10px;
+  .roleItem {
+    padding: 10px 20px;
+    border: 2px solid var(--color-text);
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  .roleItemActive {
+    padding: 10px 20px;
+    border: 2px solid var(--color-text);
+    border-radius: 10px;
+    background-color: var(--color-select-active);
+    cursor: pointer;
+  }
+}
+
+.button {
+  margin-top: 20px;
+  padding: 12px 24px;
+  border-radius: 10px;
+  background-color: var(--color-text);
+  color: var(--color-bg);
+  cursor: pointer;
+  text-align: center;
+}

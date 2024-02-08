@@ -1,0 +1,60 @@
+@import '@styles/base';
+
+.drawer {
+  height: 100%;
+  width: 18%;
+  padding: 24px;
+  background-color: var(--color-bg);
+  border-radius: 0px 25px 0px 25px;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  overflow-x: hidden;
+
+  .user {
+    @include directionY;
+    align-items: center;
+    margin-bottom: 32px;
+    .name {
+      font-size: 16px;
+      color: var(--color-text);
+      font-weight: 500;
+      margin: 0;
+    }
+    .major {
+      font-size: 16px;
+      color: var(--color-grey-text);
+      margin: 0;
+    }
+  }
+
+  .menu {
+    @include directionY;
+    align-items: center;
+    gap: 15px;
+    padding: 0% 20%;
+    .itemActive {
+      @include directionX;
+      align-items: center;
+      width: 100%;
+      gap: 8px;
+      padding: 10% 15%;
+      border-radius: 15px;
+      color: var(--color-bg);
+      background-color: var(--color-primary-button);
+      font-size: 80%;
+      cursor: pointer;
+    }
+    .item {
+      @include directionX;
+      align-items: center;
+      width: 100%;
+      gap: 8px;
+      padding: 10% 15%;
+      border-radius: 15px;
+      color: var(--color-grey-text);
+      font-size: 80%;
+      cursor: pointer;
+    }
+  }
+}

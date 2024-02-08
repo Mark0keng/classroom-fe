@@ -1,0 +1,29 @@
+@import '@styles/base.scss';
+
+.card {
+  width: 100%;
+  box-sizing: border-box;
+  background-color: var(--color-bg);
+  padding: 24px;
+  border-radius: 15px;
+  box-shadow: 7px 7px 5px 0px rgba(0, 0, 0, 0.4);
+  -webkit-box-shadow: 7px 7px 5px 0px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 7px 7px 5px 0px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  .title {
+    font-size: 18px;
+    font-weight: 500;
+  }
+  .info {
+    @include directionX;
+    gap: 8px;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 24px;
+  }
+
+  .description {
+    font-size: 14px;
+  }
+}

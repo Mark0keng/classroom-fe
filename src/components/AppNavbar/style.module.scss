@@ -1,0 +1,30 @@
+@import '@styles/base';
+
+.navbar {
+  background-color: var(--color-bg);
+  padding: 14px 32px;
+  @include directionX;
+  justify-content: space-between;
+
+  .sidebar {
+    .burger {
+      cursor: pointer;
+    }
+    .item {
+      @include directionX;
+      align-items: center;
+    }
+  }
+
+  .toolbar {
+    @include directionX;
+    gap: 32px;
+    font-size: 14px;
+    .theme {
+      cursor: pointer;
+    }
+    .option {
+      cursor: pointer;
+    }
+  }
+}
