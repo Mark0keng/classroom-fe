@@ -13,14 +13,39 @@
   .title {
     font-size: 18px;
     font-weight: 500;
+    margin-bottom: 12px;
   }
-  .info {
+  .infoSection {
     @include directionX;
-    gap: 8px;
-    align-items: center;
-    font-size: 14px;
-    font-weight: 400;
+    justify-content: space-between;
+    align-items: start;
     margin-bottom: 24px;
+
+    .lecturer {
+      @include directionX;
+      align-items: center;
+      font-size: 14px;
+      font-weight: 400;
+    }
+
+    .subjectRoom {
+      @include directionY;
+      gap: 2px;
+
+      .subject {
+        @include directionX;
+        align-items: center;
+        font-size: 12px;
+        font-weight: 400;
+      }
+
+      .room {
+        @include directionX;
+        align-items: center;
+        font-size: 12px;
+        font-weight: 400;
+      }
+    }
   }
 
   .description {

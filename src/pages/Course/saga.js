@@ -9,11 +9,11 @@ function* getCourse({ userData }) {
   try {
     if (userData.role === 1) {
       const response = yield call(getStudentCourse, userData.id);
-      yield put(setCourse(response.data.course));
+      yield put(setCourse(response.data));
     }
     if (userData.role === 2) {
       const response = yield call(getLecturerCourse, userData.id);
-      yield put(setCourse(response.data.course));
+      yield put(setCourse(response.data));
     }
   } catch (error) {
     console.log(error);

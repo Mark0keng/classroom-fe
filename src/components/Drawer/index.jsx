@@ -34,7 +34,10 @@ const Drawer = ({ profile, active }) => {
       <div className={classes.user}>
         <Avatar alt="Remy Sharp" src="" sx={{ marginBottom: 2 }} />
         <p className={classes.name}>{profile.name}</p>
-        <p className={classes.major}>Computer Science</p>
+        <p className={classes.major}>
+          {profile.role == 1 && 'Student'}
+          {profile.role == 2 && 'Lecturer'}
+        </p>
       </div>
 
       <div className={classes.menu}>

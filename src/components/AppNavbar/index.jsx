@@ -13,15 +13,16 @@ import LightModeRoundedIcon from '@mui/icons-material/LightModeRounded';
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import MenuOpenRoundedIcon from '@mui/icons-material/MenuOpenRounded';
 import DashboardRoundedIcon from '@mui/icons-material/DashboardRounded';
-import ClassRoundedIcon from '@mui/icons-material/ClassRounded';
 import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import ExitToAppRoundedIcon from '@mui/icons-material/ExitToAppRounded';
 import LibraryAddRoundedIcon from '@mui/icons-material/LibraryAddRounded';
+import LogoutRounded from '@mui/icons-material/LogoutRounded';
 
 import classes from './style.module.scss';
+import { setLogin, setToken } from '@containers/Client/actions';
 
-const AppNavbar = ({ title, locale, theme }) => {
+const AppNavbar = ({ title, locale, theme, profile }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [menuPosition, setMenuPosition] = useState(null);
@@ -49,6 +50,11 @@ const AppNavbar = ({ title, locale, theme }) => {
     setOptionPosition(null);
   };
 
+  const handleLogout = () => {
+    dispatch(setLogin(false));
+    dispatch(setToken(null));
+  };
+
   return (
     <div className={classes.navbar}>
       <div className={classes.sidebar}>
@@ -56,14 +62,14 @@ const AppNavbar = ({ title, locale, theme }) => {
           {!menuOpen ? <MenuRoundedIcon /> : <MenuOpenRoundedIcon />}
         </div>
         <Menu open={menuOpen} anchorEl={menuPosition} onClose={handleClose}>
-          <MenuItem className={classes.item}>
-            <DashboardRoundedIcon style={{ paddingRight: 8, width: 20 }} /> Dashboard
-          </MenuItem>
-          <MenuItem className={classes.item}>
-            <ClassRoundedIcon style={{ paddingRight: 8, width: 20 }} /> Classes
+          <MenuItem className={classes.item} onClick={() => {navigate("/course")}}>
+            <DashboardRoundedIcon style={{ paddingRight: 8, width: 20 }} /> Courses
           </MenuItem>
           <MenuItem className={classes.item}>
             <SettingsRoundedIcon style={{ paddingRight: 8, width: 20 }} /> Setting
+          </MenuItem>
+          <MenuItem className={classes.item} onClick={handleLogout}>
+            <LogoutRounded style={{ paddingRight: 8, width: 20 }}/> Logout
           </MenuItem>
         </Menu>
       </div>
@@ -72,7 +78,8 @@ const AppNavbar = ({ title, locale, theme }) => {
           <AddRoundedIcon />
         </div>
         <Menu open={optionOpen} anchorEl={optionPosition} onClose={handleOptionClose}>
-          <MenuItem
+          {profile.lecturer_id && (
+            <MenuItem
             className={classes.item}
             onClick={() => {
               navigate('/create-course');
@@ -80,7 +87,10 @@ const AppNavbar = ({ title, locale, theme }) => {
           >
             <LibraryAddRoundedIcon style={{ paddingRight: 8, width: 20 }} /> Create Class
           </MenuItem>
-          <MenuItem
+          )}
+          
+          {profile.student_id && (
+            <MenuItem
             className={classes.item}
             onClick={() => {
               navigate('/join-course');
@@ -88,6 +98,7 @@ const AppNavbar = ({ title, locale, theme }) => {
           >
             <ExitToAppRoundedIcon style={{ paddingRight: 8, width: 20 }} /> Join Class
           </MenuItem>
+          )}
         </Menu>
 
         <div className={classes.theme} onClick={handleTheme} data-testid="toggleTheme">

@@ -21,9 +21,9 @@ const Course = ({ profile, courses }) => {
     <div>
       <div className={classes.title}>My Courses</div>
       <Grid container spacing={3}>
-        {courses.map((course) => (
-          <Grid item sx={12} md={6} lg={4}>
-            <Card data={course} lecturer={profile.name} />
+        {courses?.map((course, index) => (
+          <Grid key={index} item xs={12} md={6} lg={4}>
+          <Card data={course} role={profile.role}/>
           </Grid>
         ))}
       </Grid>

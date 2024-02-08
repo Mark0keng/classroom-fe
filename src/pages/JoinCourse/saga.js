@@ -9,6 +9,10 @@ function* doJoinCourse({ payload, cbSuccess, cbFailed }) {
     yield call(joinCourse, payload);
     cbSuccess && cbSuccess();
   } catch (error) {
+    console.log(error.response);
+    if(error?.response?.data?.message) {
+      cbFailed && cbFailed(error.response.data.message);
+    }
     if (error?.response?.data?.output?.payload?.message) {
       cbFailed && cbFailed(error.response.data.output.payload.message);
     }
