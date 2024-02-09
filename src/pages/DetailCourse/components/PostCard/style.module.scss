@@ -1,0 +1,36 @@
+@import '@styles/base.scss';
+
+.card {
+  padding: 18px;
+  background-color: var(--color-bg);
+  border-radius: 10px;
+  box-shadow: 7px 7px 5px 0px rgba(0, 0, 0, 0.4);
+  -webkit-box-shadow: 7px 7px 5px 0px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 7px 7px 5px 0px rgba(0, 0, 0, 0.4);
+
+  .content {
+    @include directionX;
+    gap: 30px;
+    .icon {
+      padding: 10px;
+      background-color: var(--color-primary-button);
+      border-radius: 25px;
+      width: 30px;
+      height: 30px;
+    }
+
+    .info {
+      @include directionY;
+
+      .name {
+        font-size: 18px;
+        font-weight: 500;
+      }
+
+      .createdAt {
+        font-size: 14px;
+        font-weight: 300;
+      }
+    }
+  }
+}

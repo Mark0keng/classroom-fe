@@ -1,14 +1,16 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 import { setLoading } from '@containers/App/actions';
-import { joinCourse } from '@domain/api';
-import { JOIN_COURSE } from './constants';
+import { CREATE_ASSIGNMENT } from './constants';
+import { createAssignment, getCourseByCode } from '@domain/api';
 
-function* doJoinCourse({ payload, cbSuccess, cbFailed }) {
+function* doCreateAssignment({ payload, courseCode, cbSuccess, cbFailed }) {
   yield put(setLoading(true));
   try {
-    yield call(joinCourse, payload);
+    const course = yield call(getCourseByCode, courseCode);
+    yield call(createAssignment, { ...payload, course_id: course.data.id });
     cbSuccess && cbSuccess();
   } catch (error) {
+    console.log(error);
     if (error?.response?.data?.message) {
       cbFailed && cbFailed(error.response.data.message);
     }
@@ -19,6 +21,6 @@ function* doJoinCourse({ payload, cbSuccess, cbFailed }) {
   yield put(setLoading(false));
 }
 
-export default function* joinCourseSaga() {
-  yield takeLatest(JOIN_COURSE, doJoinCourse);
+export default function* createAssignmentSaga() {
+  yield takeLatest(CREATE_ASSIGNMENT, doCreateAssignment);
 }

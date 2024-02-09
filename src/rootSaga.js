@@ -6,7 +6,16 @@ import registerSaga from '@pages/Register/saga';
 import courseSaga from '@pages/Course/saga';
 import createCourseSaga from '@pages/CreateCourse/saga';
 import joinCourseSaga from '@pages/JoinCourse/saga';
+import createAssignmentSaga from '@pages/CreateAssignment/saga';
 
 export default function* rootSaga() {
-  yield all([appSaga(), loginSaga(), registerSaga(), courseSaga(), createCourseSaga(), joinCourseSaga()]);
+  yield all([
+    appSaga(),
+    loginSaga(),
+    registerSaga(),
+    courseSaga(),
+    createCourseSaga(),
+    joinCourseSaga(),
+    createAssignmentSaga(),
+  ]);
 }

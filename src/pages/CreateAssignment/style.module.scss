@@ -1,0 +1,36 @@
+@import '@styles/base.scss';
+
+.card {
+  @include card;
+
+  .title {
+    @include title;
+  }
+
+  .inputSection {
+    @include directionY;
+    gap: 12px;
+    margin-bottom: 24px;
+
+    .formControl {
+      .label {
+        @include label;
+      }
+      .input {
+        @include input;
+      }
+      .textarea {
+        @include input;
+        height: 30%;
+      }
+    }
+  }
+
+  .button {
+    @include button;
+  }
+
+  .error {
+    @include alert;
+  }
+}

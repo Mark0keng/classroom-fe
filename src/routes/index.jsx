@@ -1,12 +1,14 @@
 import AppLayout from '@layouts/AppLayout';
 import MainLayout from '@layouts/MainLayout';
 import Course from '@pages/Course';
+import CreateAssignment from '@pages/CreateAssignment';
 import CreateCourse from '@pages/CreateCourse';
 import DetailCourse from '@pages/DetailCourse';
 
 import Home from '@pages/Home';
 import JoinCourse from '@pages/JoinCourse';
 import Login from '@pages/Login';
+import MemberCourse from '@pages/MemberCourse';
 import NotFound from '@pages/NotFound';
 import Register from '@pages/Register';
 
@@ -58,6 +60,20 @@ const routes = [
     name: 'Join Course',
     protected: true,
     component: JoinCourse,
+    layout: AppLayout,
+  },
+  {
+    path: 'course/:code/create-assignment',
+    name: 'Create Assignment',
+    protected: true,
+    component: CreateAssignment,
+    layout: AppLayout,
+  },
+  {
+    path: 'course/:code/member',
+    name: 'Member Course',
+    protected: true,
+    component: MemberCourse,
     layout: AppLayout,
   },
   { path: '*', name: 'Not Found', component: NotFound, layout: MainLayout, protected: false },
