@@ -1,32 +1,23 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 import { setLoading } from '@containers/App/actions';
-import { getCourseMember, getLecturerCourse, getStudentCourse } from '@domain/api';
-import { GET_COURSE, GET_STUDENT } from './constants';
-import { setCourse } from './actions';
+import { getCourseByCode, getCourseMember } from '@domain/api';
+import { GET_MEMBER } from './constants';
+import { setMember } from './actions';
 
-function* getLecturer({ userData }) {
+function* doGetMember({ courseCode, cbFailed }) {
   yield put(setLoading(true));
   try {
-    const response = yield call(getLec, userData.id);
-    yield put(setCourse(response.data));
+    const course = yield call(getCourseByCode, courseCode);
+    const response = yield call(getCourseMember, course?.data?.id);
+    yield put(setMember({ lecturer: response.data.lecturer, students: response.data.students }));
   } catch (error) {
-    console.log(error);
-  }
-  yield put(setLoading(false));
-}
-
-function* getStudent({ payload }) {
-  yield put(setLoading(true));
-  try {
-    const response = yield call(getCourseMember, payload);
-    yield put(setCourse(response.data));
-  } catch (error) {
-    console.log(error);
+    if (error?.response?.data?.output?.payload?.message) {
+      cbFailed && cbFailed(error.response.data.output.payload.message);
+    }
   }
   yield put(setLoading(false));
 }
 
 export default function* memberCourseSaga() {
-  yield takeLatest(GET_LECTURER, getLecturer);
-  yield takeLatest(GET_STUDENT, getStudent);
+  yield takeLatest(GET_MEMBER, doGetMember);
 }

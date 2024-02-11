@@ -1,0 +1,49 @@
+@import '@styles/base.scss';
+
+.card {
+  @include card;
+}
+
+.header {
+  @include directionX;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+
+  .title {
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  .iconBtn {
+    cursor: pointer;
+  }
+}
+
+.dueDate {
+  text-align: end;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.instruction {
+  font-size: 14px;
+}
+
+.submitSection {
+  @include directionY;
+  gap: 18px;
+
+  .fileBox {
+    height: 70%;
+    border: 2px solid var(--color-text);
+    padding: 18px;
+    border-radius: 15px;
+    font-size: 14px;
+  }
+
+  .submit {
+    @include button;
+    font-size: 14px;
+  }
+}

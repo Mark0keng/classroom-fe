@@ -1,4 +1,2 @@
-export const SET_LECTURER = 'SET_LECTURER';
-export const GET_LECTURER = 'GET_LECTURER';
-export const SET_STUDENT = 'SET_STUDENT';
-export const GET_STUDENT = 'GET_STUDENT';
+export const SET_MEMBER = 'SET_MEMBER';
+export const GET_MEMBER = 'GET_MEMBER';

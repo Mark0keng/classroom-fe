@@ -14,6 +14,8 @@ const urls = {
   getStudentCourse: 'student',
   getLecturerCourse: 'lecturer',
   createAssignment: 'assignment/create',
+  getCourseAssignment: 'assignment/course',
+  createStudentAssignment: 'student-assignment/create',
 };
 
 export const callAPI = async (endpoint, method, header = {}, params = {}, data = {}) => {
@@ -42,7 +44,9 @@ export const register = (payload) => callAPI(urls.register, 'post', {}, {}, payl
 export const joinCourse = (payload) => callAPI(urls.joinCourse, 'post', {}, {}, payload);
 export const createCourse = (payload) => callAPI(urls.createCourse, 'post', {}, {}, payload);
 export const getCourseByCode = (courseCode) => callAPI(`${urls.getCourseByCode}/${courseCode}`, 'get');
-export const getCourseMember = (courseCode) => callAPI(`${urls.getCourseByCode}/${courseCode}`, 'get');
+export const getCourseMember = (courseId) => callAPI(`${urls.getCourseByCode}/${courseId}/get-member`, 'get');
 export const getStudentCourse = (studentId) => callAPI(`${urls.getStudentCourse}/${studentId}/get-course`, 'get');
 export const getLecturerCourse = (lecturerId) => callAPI(`${urls.getLecturerCourse}/${lecturerId}/get-course`, 'get');
 export const createAssignment = (payload) => callAPI(urls.createAssignment, 'post', {}, {}, payload);
+export const createStudentAssignment = (payload) => callAPI(urls.createStudentAssignment, 'post', {}, {}, payload);
+export const getCourseAssignment = (courseCode) => callAPI(`${urls.getCourseAssignment}/${courseCode}`, 'get');

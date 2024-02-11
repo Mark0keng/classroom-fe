@@ -20,10 +20,40 @@
 
   .box {
     margin-bottom: 48px;
-    .userSection {
+
+    .userCard {
       @include directionX;
+      justify-content: space-between;
       align-items: center;
-      gap: 20px;
+
+      .userSection {
+        @include directionX;
+        align-items: center;
+        gap: 20px;
+        margin-bottom: 20px;
+      }
+
+      .actionSection {
+        .removeBtn {
+          cursor: pointer;
+        }
+      }
     }
+  }
+}
+
+.modalContent {
+  padding: 24px;
+
+  .modalTitle {
+    font-size: 18px;
+    font-weight: 700;
+    color: #d24545;
+    padding-bottom: 20px;
+  }
+
+  .modalDesc {
+    font-size: 14px;
+    font-weight: 500;
   }
 }

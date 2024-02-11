@@ -8,11 +8,11 @@ function* getCourse({ userData }) {
   yield put(setLoading(true));
   try {
     if (userData.role === 1) {
-      const response = yield call(getStudentCourse, userData.id);
+      const response = yield call(getStudentCourse, userData.student_id);
       yield put(setCourse(response.data));
     }
     if (userData.role === 2) {
-      const response = yield call(getLecturerCourse, userData.id);
+      const response = yield call(getLecturerCourse, userData.lecturer_id);
       yield put(setCourse(response.data));
     }
   } catch (error) {

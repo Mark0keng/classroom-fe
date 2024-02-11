@@ -1,21 +1,17 @@
 import { produce } from 'immer';
-import { SET_LECTURER, SET_STUDENT } from './constants';
+import { SET_MEMBER } from './constants';
 
 export const initialState = {
-  lecturer: {},
-  students: [],
+  member: null,
 };
 
-export const storedKey = ['lecturer', 'students'];
+export const storedKey = ['member'];
 
 const memberCourseReducer = (state = initialState, action) =>
   produce(state, (draft) => {
     switch (action.type) {
-      case SET_LECTURER:
-        draft.lecturer = action.lecturer;
-        break;
-      case SET_STUDENT:
-        draft.students = action.students;
+      case SET_MEMBER:
+        draft.member = action.member;
         break;
     }
   });

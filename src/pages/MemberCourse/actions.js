@@ -1,21 +1,12 @@
-import { SET_LECTURER, GET_LECTURER, SET_STUDENT, GET_STUDENT } from './constants';
+import { SET_MEMBER, GET_MEMBER } from './constants';
 
-export const setLecturer = (lecturer) => ({
-  type: SET_LECTURER,
-  lecturer,
+export const setMember = (member) => ({
+  type: SET_MEMBER,
+  member,
 });
 
-export const getLecturer = (payload) => ({
-  type: GET_LECTURER,
-  payload,
-});
-
-export const setStudent = (students) => ({
-  type: SET_STUDENT,
-  students,
-});
-
-export const getStudent = (payload) => ({
-  type: GET_STUDENT,
-  payload,
+export const getMember = (courseCode, cbFailed) => ({
+  type: GET_MEMBER,
+  courseCode,
+  cbFailed,
 });

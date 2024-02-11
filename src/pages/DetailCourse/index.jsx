@@ -1,16 +1,25 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
-
-import classes from './style.module.scss';
+import PropTypes from 'prop-types';
+import { useEffect } from 'react';
+import { connect, useDispatch } from 'react-redux';
+import { getAssignment } from './actions';
 import { Grid } from '@mui/material';
 import PostCard from './components/PostCard/PostCard';
 import AddRounded from '@mui/icons-material/AddRounded';
 import { useNavigate, useParams } from 'react-router-dom';
+import { selectAssignment } from './selector';
+import { createStructuredSelector } from 'reselect';
+import { selectProfile } from '@containers/Client/selectors';
 
-const DetailCourse = () => {
+import classes from './style.module.scss';
+
+const DetailCourse = ({ profile, assignments }) => {
   const { code } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(getAssignment(code));
+  }, [dispatch]);
 
   return (
     <div>
@@ -42,11 +51,20 @@ const DetailCourse = () => {
           </Grid>
           <Grid item xs={0} md={9}>
             <div className={classes.postSection}>
-              <div className={classes.createBtn}>
-                <AddRounded /> Create
-              </div>
+              {profile.role === 2 && (
+                <div
+                  className={classes.createBtn}
+                  onClick={() => {
+                    navigate(`/course/${code}/create-assignment`);
+                  }}
+                >
+                  <AddRounded /> Create
+                </div>
+              )}
 
-              <PostCard />
+              {assignments?.map((assignment, index) => (
+                <PostCard assignment={assignment} courseCode={code} key={index} />
+              ))}
             </div>
           </Grid>
         </Grid>
@@ -55,4 +73,14 @@ const DetailCourse = () => {
   );
 };
 
-export default DetailCourse;
+DetailCourse.propTypes = {
+  profile: PropTypes.object,
+  assignments: PropTypes.array,
+};
+
+const mapStateToProps = createStructuredSelector({
+  profile: selectProfile,
+  assignments: selectAssignment,
+});
+
+export default connect(mapStateToProps)(DetailCourse);

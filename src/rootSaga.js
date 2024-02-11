@@ -7,6 +7,8 @@ import courseSaga from '@pages/Course/saga';
 import createCourseSaga from '@pages/CreateCourse/saga';
 import joinCourseSaga from '@pages/JoinCourse/saga';
 import createAssignmentSaga from '@pages/CreateAssignment/saga';
+import memberCourseSaga from '@pages/MemberCourse/saga';
+import detailCourseSaga from '@pages/DetailCourse/saga';
 
 export default function* rootSaga() {
   yield all([
@@ -17,5 +19,7 @@ export default function* rootSaga() {
     createCourseSaga(),
     joinCourseSaga(),
     createAssignmentSaga(),
+    memberCourseSaga(),
+    detailCourseSaga(),
   ]);
 }

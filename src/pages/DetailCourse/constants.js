@@ -1,0 +1,2 @@
+export const SET_ASSIGNMENT = 'SET_ASSIGNMENT';
+export const GET_ASSIGNMENT = 'GET_ASSIGNMENT';

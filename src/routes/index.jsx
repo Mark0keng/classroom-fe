@@ -3,6 +3,7 @@ import MainLayout from '@layouts/MainLayout';
 import Course from '@pages/Course';
 import CreateAssignment from '@pages/CreateAssignment';
 import CreateCourse from '@pages/CreateCourse';
+import DetailAssignment from '@pages/DetailAssignment';
 import DetailCourse from '@pages/DetailCourse';
 
 import Home from '@pages/Home';
@@ -74,6 +75,13 @@ const routes = [
     name: 'Member Course',
     protected: true,
     component: MemberCourse,
+    layout: AppLayout,
+  },
+  {
+    path: 'course/:code/assignment/:id',
+    name: 'Detail Assignment',
+    protected: true,
+    component: DetailAssignment,
     layout: AppLayout,
   },
   { path: '*', name: 'Not Found', component: NotFound, layout: MainLayout, protected: false },

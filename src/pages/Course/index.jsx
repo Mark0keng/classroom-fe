@@ -14,7 +14,13 @@ const Course = ({ profile, courses }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getCourse({ id: profile.id, role: profile.role }));
+    dispatch(
+      getCourse({
+        ...(profile.role === 1 && { student_id: profile.student_id }),
+        ...(profile.role === 2 && { lecturer_id: profile.lecturer_id }),
+        role: profile.role,
+      })
+    );
   }, [dispatch]);
 
   return (
@@ -23,7 +29,7 @@ const Course = ({ profile, courses }) => {
       <Grid container spacing={3}>
         {courses?.map((course, index) => (
           <Grid key={index} item xs={12} md={6} lg={4}>
-          <Card data={course} role={profile.role}/>
+            <Card data={course} role={profile.role} />
           </Grid>
         ))}
       </Grid>
