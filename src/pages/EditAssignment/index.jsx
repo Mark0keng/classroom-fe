@@ -1,19 +1,28 @@
-import { useDispatch } from 'react-redux';
-import { useState } from 'react';
+import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
+import { connect, useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Alert } from '@mui/material';
-import { createAssignment } from './actions';
+import Alert from '@mui/material/Alert';
+
+import { createStructuredSelector } from 'reselect';
+import { selectAssignment } from '@pages/DetailAssignment/selector';
+import { editAssignment, getAssignment } from './actions';
 
 import classes from './style.module.scss';
 
-const CreateAssignment = () => {
-  const { code } = useParams();
-  const [name, setName] = useState('');
-  const [instruction, setInstruction] = useState('');
-  const [dueDate, setDueDate] = useState('');
+const EditAssignment = ({ assignment }) => {
+  const formatDate = new Date(assignment?.dueDate).toISOString().slice(0, 16);
+  const { id, code } = useParams();
+  const [name, setName] = useState(assignment?.name || '');
+  const [instruction, setInstruction] = useState(assignment?.instruction || '');
+  const [dueDate, setDueDate] = useState(formatDate || '');
   const [error, setError] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(getAssignment(id));
+  }, [dispatch, id]);
 
   const handleSubmit = () => {
     const data = {
@@ -21,13 +30,13 @@ const CreateAssignment = () => {
       instruction,
       dueDate,
     };
-
     dispatch(
-      createAssignment(
+      editAssignment(
         data,
         code,
+        id,
         () => {
-          navigate(`/course/${code}`);
+          navigate(`/course/${code}/assignment/${id}`);
         },
         (errMessage) => {
           setError(errMessage);
@@ -38,7 +47,16 @@ const CreateAssignment = () => {
 
   return (
     <div className={classes.card}>
-      <div className={classes.title}>Assignment</div>
+      <div className={classes.title}>Edit Assignment</div>
+
+      {error && (
+        <div className={classes.error}>
+          <Alert variant="filled" severity="error">
+            {error}
+          </Alert>
+        </div>
+      )}
+
       <div className={classes.inputSection}>
         <div className={classes.formControl}>
           <p className={classes.label}>Name</p>
@@ -75,24 +93,19 @@ const CreateAssignment = () => {
           />
         </div>
       </div>
-
       <div className={classes.button} onClick={handleSubmit}>
         Submit
       </div>
-
-      {error && (
-        <div className={classes.error}>
-          <Alert
-            severity="error"
-            sx={{ padding: '3px 20px', lineHeight: 1, marginBottom: 2, width: 'fit-content' }}
-            icon={false}
-          >
-            {error}
-          </Alert>
-        </div>
-      )}
     </div>
   );
 };
 
-export default CreateAssignment;
+EditAssignment.propTypes = {
+  assignment: PropTypes.object,
+};
+
+const mapStateToProps = createStructuredSelector({
+  assignment: selectAssignment,
+});
+
+export default connect(mapStateToProps)(EditAssignment);

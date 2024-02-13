@@ -33,10 +33,10 @@ const Drawer = ({ profile, active }) => {
     <Box className={classes.drawer} sx={{ display: { xs: 'none', sm: 'none', md: 'block' } }}>
       <div className={classes.user}>
         <Avatar alt="Remy Sharp" src="" sx={{ marginBottom: 2 }} />
-        <p className={classes.name}>{profile.name}</p>
+        <p className={classes.name}>{profile?.name}</p>
         <p className={classes.major}>
-          {profile.role == 1 && 'Student'}
-          {profile.role == 2 && 'Lecturer'}
+          {profile?.role === 1 && 'Student'}
+          {profile?.role === 2 && 'Lecturer'}
         </p>
       </div>
 

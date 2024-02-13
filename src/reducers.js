@@ -7,6 +7,7 @@ import drawerReducer, { storedKey as storedDrawerState } from '@components/Drawe
 import courseReducer, { storedKey as storedCourseState } from '@pages/Course/reducer';
 import detailCourseReducer, { storedKey as storedDetailCourseState } from '@pages/DetailCourse/reducer';
 import memberCourseReducer, { storedKey as storedMemberCourseState } from '@pages/MemberCourse/reducer';
+import detailAssignmentReducer, { storedKey as storedDetailAssignmentState } from '@pages/DetailAssignment/reducer';
 import languageReducer from '@containers/Language/reducer';
 
 import { mapWithPersistor } from './persistence';
@@ -19,6 +20,7 @@ const storedReducers = {
   course: { reducer: courseReducer, whitelist: storedCourseState },
   detailCourse: { reducer: detailCourseReducer, whitelist: storedDetailCourseState },
   memberCourse: { reducer: memberCourseReducer, whitelist: storedMemberCourseState },
+  detailAssignment: { reducer: detailAssignmentReducer, whitelist: storedDetailAssignmentState },
 };
 
 const temporaryReducers = {

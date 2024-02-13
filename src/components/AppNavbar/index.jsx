@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import { useState } from 'react';
 import PropTypes from 'prop-types';
@@ -18,9 +19,9 @@ import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import ExitToAppRoundedIcon from '@mui/icons-material/ExitToAppRounded';
 import LibraryAddRoundedIcon from '@mui/icons-material/LibraryAddRounded';
 import LogoutRounded from '@mui/icons-material/LogoutRounded';
+import { setLogin, setToken } from '@containers/Client/actions';
 
 import classes from './style.module.scss';
-import { setLogin, setToken } from '@containers/Client/actions';
 
 const AppNavbar = ({ title, locale, theme, profile }) => {
   const dispatch = useDispatch();
@@ -62,14 +63,19 @@ const AppNavbar = ({ title, locale, theme, profile }) => {
           {!menuOpen ? <MenuRoundedIcon /> : <MenuOpenRoundedIcon />}
         </div>
         <Menu open={menuOpen} anchorEl={menuPosition} onClose={handleClose}>
-          <MenuItem className={classes.item} onClick={() => {navigate("/course")}}>
+          <MenuItem
+            className={classes.item}
+            onClick={() => {
+              navigate('/course');
+            }}
+          >
             <DashboardRoundedIcon style={{ paddingRight: 8, width: 20 }} /> Courses
           </MenuItem>
           <MenuItem className={classes.item}>
             <SettingsRoundedIcon style={{ paddingRight: 8, width: 20 }} /> Setting
           </MenuItem>
           <MenuItem className={classes.item} onClick={handleLogout}>
-            <LogoutRounded style={{ paddingRight: 8, width: 20 }}/> Logout
+            <LogoutRounded style={{ paddingRight: 8, width: 20 }} /> Logout
           </MenuItem>
         </Menu>
       </div>
@@ -78,26 +84,26 @@ const AppNavbar = ({ title, locale, theme, profile }) => {
           <AddRoundedIcon />
         </div>
         <Menu open={optionOpen} anchorEl={optionPosition} onClose={handleOptionClose}>
-          {profile.lecturer_id && (
+          {profile?.lecturer_id && (
             <MenuItem
-            className={classes.item}
-            onClick={() => {
-              navigate('/create-course');
-            }}
-          >
-            <LibraryAddRoundedIcon style={{ paddingRight: 8, width: 20 }} /> Create Class
-          </MenuItem>
+              className={classes.item}
+              onClick={() => {
+                navigate('/create-course');
+              }}
+            >
+              <LibraryAddRoundedIcon style={{ paddingRight: 8, width: 20 }} /> Create Class
+            </MenuItem>
           )}
-          
-          {profile.student_id && (
+
+          {profile?.student_id && (
             <MenuItem
-            className={classes.item}
-            onClick={() => {
-              navigate('/join-course');
-            }}
-          >
-            <ExitToAppRoundedIcon style={{ paddingRight: 8, width: 20 }} /> Join Class
-          </MenuItem>
+              className={classes.item}
+              onClick={() => {
+                navigate('/join-course');
+              }}
+            >
+              <ExitToAppRoundedIcon style={{ paddingRight: 8, width: 20 }} /> Join Class
+            </MenuItem>
           )}
         </Menu>
 

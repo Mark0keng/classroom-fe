@@ -1,28 +1,33 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { connect, useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import { getMember } from './actions';
-import { selectMember } from './selector';
+import { useNavigate, useParams } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 
+import { selectProfile } from '@containers/Client/selectors';
 import { Avatar, Dialog } from '@mui/material';
 import { PersonRemoveRounded } from '@mui/icons-material';
+import { selectMember } from './selector';
+import { deleteMember, getMember } from './actions';
+
 import classes from './style.module.scss';
 
-const MemberCourse = ({ member }) => {
+const MemberCourse = ({ member, profile }) => {
+  const [memberId, setMemberId] = useState('');
   const [open, setOpen] = useState(false);
-  const [error, setError] = useState('');
   const { code } = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(
-      getMember(code, (errMessage) => {
-        setError(errMessage);
+      getMember(code, (error) => {
+        if (error.statusCode === 404) {
+          navigate('/not-found');
+        }
       })
     );
-  }, [dispatch]);
+  }, [code, dispatch, navigate]);
 
   const handleModalOpen = () => {
     setOpen(true);
@@ -32,12 +37,29 @@ const MemberCourse = ({ member }) => {
     setOpen(false);
   };
 
+  const handleDeleteMember = () => {
+    dispatch(deleteMember(memberId, code));
+  };
+
   return (
     <div>
       <div className={classes.navigation}>
-        <div className={classes.item}>Stream</div>
-        <div className={classes.item}>Assignment</div>
-        <div className={classes.item}>People</div>
+        <div
+          className={classes.item}
+          onClick={() => {
+            navigate(`/course/${code}`);
+          }}
+        >
+          Stream
+        </div>
+        <div
+          className={classes.item}
+          onClick={() => {
+            navigate(`/course/${code}/member`);
+          }}
+        >
+          People
+        </div>
       </div>
       <div className={classes.card}>
         <div className={classes.box}>
@@ -62,9 +84,17 @@ const MemberCourse = ({ member }) => {
               </div>
 
               <div className={classes.actionSection}>
-                <div className={classes.removeBtn} onClick={handleModalOpen}>
-                  <PersonRemoveRounded />
-                </div>
+                {profile.role === 2 && (
+                  <div
+                    className={classes.removeBtn}
+                    onClick={() => {
+                      setMemberId(student.id);
+                      handleModalOpen();
+                    }}
+                  >
+                    <PersonRemoveRounded />
+                  </div>
+                )}
                 <Dialog
                   onClose={handleModalClose}
                   open={open}
@@ -73,6 +103,15 @@ const MemberCourse = ({ member }) => {
                   <div className={classes.modalContent}>
                     <div className={classes.modalTitle}>Remove Student</div>
                     <div className={classes.modalDesc}>This action will remove this student, are you sure?</div>
+                    <div
+                      className={classes.submit}
+                      onClick={() => {
+                        handleDeleteMember();
+                        handleModalClose();
+                      }}
+                    >
+                      Submit
+                    </div>
                   </div>
                 </Dialog>
               </div>
@@ -85,10 +124,12 @@ const MemberCourse = ({ member }) => {
 };
 
 MemberCourse.propTypes = {
+  profile: PropTypes.object,
   member: PropTypes.any,
 };
 
 const mapStateToProps = createStructuredSelector({
+  profile: selectProfile,
   member: selectMember,
 });
 

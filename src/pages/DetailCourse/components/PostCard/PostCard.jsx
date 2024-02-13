@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import AssignmentRounded from '@mui/icons-material/AssignmentRounded';
 import { dateFormat } from '@utils/dateFormatter';
 import { useNavigate } from 'react-router-dom';
@@ -10,7 +11,7 @@ const PostCard = ({ assignment, courseCode }) => {
     <div
       className={classes.card}
       onClick={() => {
-        navigate(`/course/${courseCode}/assignment/${assignment.id}`);
+        navigate(`/course/${courseCode}/assignment/${assignment?.id}`);
       }}
     >
       <div className={classes.content}>
@@ -18,8 +19,8 @@ const PostCard = ({ assignment, courseCode }) => {
           <AssignmentRounded />
         </div>
         <div className={classes.info}>
-          <div className={classes.name}>{assignment.name}</div>
-          <div className={classes.createdAt}>{dateFormat(assignment.createdAt)}</div>
+          <div className={classes.name}>{assignment?.name}</div>
+          <div className={classes.createdAt}>{dateFormat(assignment?.createdAt)}</div>
         </div>
       </div>
     </div>

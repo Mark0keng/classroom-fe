@@ -10,19 +10,19 @@ import classes from './style.module.scss';
 import { joinCourse } from './actions';
 
 const JoinCourse = ({ profile }) => {
-  const [code, setCode] = useState("");
-  const [error, setError] = useState("");
+  const [code, setCode] = useState('');
+  const [error, setError] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleSubmit = () => {
     const data = {
       student_id: profile.student_id,
-      code,
     };
     dispatch(
       joinCourse(
         data,
+        code,
         () => {
           navigate('/course');
         },
@@ -42,7 +42,11 @@ const JoinCourse = ({ profile }) => {
 
         {error && (
           <div className={classes.error}>
-            <Alert severity="error" sx={{padding: "3px 20px", lineHeight: 1, marginBottom:2, width: "fit-content"}} icon={false}>
+            <Alert
+              severity="error"
+              sx={{ padding: '3px 20px', lineHeight: 1, marginBottom: 2, width: 'fit-content' }}
+              icon={false}
+            >
               {error}
             </Alert>
           </div>

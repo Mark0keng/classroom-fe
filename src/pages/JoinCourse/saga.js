@@ -1,12 +1,13 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 import { setLoading } from '@containers/App/actions';
-import { joinCourse } from '@domain/api';
+import { getCourseByCode, joinCourse } from '@domain/api';
 import { JOIN_COURSE } from './constants';
 
-function* doJoinCourse({ payload, cbSuccess, cbFailed }) {
+function* doJoinCourse({ payload, courseCode, cbSuccess, cbFailed }) {
   yield put(setLoading(true));
   try {
-    yield call(joinCourse, payload);
+    const course = yield call(getCourseByCode, courseCode);
+    yield call(joinCourse, { ...payload, course_id: course.data.id });
     cbSuccess && cbSuccess();
   } catch (error) {
     if (error?.response?.data?.message) {

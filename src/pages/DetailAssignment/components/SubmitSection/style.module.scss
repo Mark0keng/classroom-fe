@@ -1,0 +1,31 @@
+@import '@styles/base.scss';
+
+.card {
+  @include card;
+}
+
+.submitSection {
+  @include directionY;
+  gap: 18px;
+
+  .fileBox {
+    height: 70%;
+    border: 2px solid var(--color-text);
+    padding: 18px;
+    border-radius: 15px;
+    font-size: 14px;
+
+    .file {
+      @include directionX;
+      align-items: center;
+      font-size: 12px;
+      overflow: hidden;
+      color: var(--color-text);
+    }
+  }
+
+  .submit {
+    @include button;
+    font-size: 14px;
+  }
+}

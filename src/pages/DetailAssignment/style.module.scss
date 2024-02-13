@@ -30,20 +30,26 @@
   font-size: 14px;
 }
 
-.submitSection {
-  @include directionY;
-  gap: 18px;
+.modalContent {
+  padding: 24px;
 
-  .fileBox {
-    height: 70%;
-    border: 2px solid var(--color-text);
-    padding: 18px;
-    border-radius: 15px;
+  .modalTitle {
+    font-size: 18px;
+    font-weight: 700;
+    color: #d24545;
+    padding-bottom: 20px;
+  }
+
+  .modalDesc {
     font-size: 14px;
+    font-weight: 500;
   }
 
   .submit {
     @include button;
+    width: 20%;
     font-size: 14px;
+    text-align: center;
+    margin-top: 20px;
   }
 }

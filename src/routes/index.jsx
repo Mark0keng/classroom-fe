@@ -5,6 +5,7 @@ import CreateAssignment from '@pages/CreateAssignment';
 import CreateCourse from '@pages/CreateCourse';
 import DetailAssignment from '@pages/DetailAssignment';
 import DetailCourse from '@pages/DetailCourse';
+import EditAssignment from '@pages/EditAssignment';
 
 import Home from '@pages/Home';
 import JoinCourse from '@pages/JoinCourse';
@@ -82,6 +83,13 @@ const routes = [
     name: 'Detail Assignment',
     protected: true,
     component: DetailAssignment,
+    layout: AppLayout,
+  },
+  {
+    path: 'course/:code/assignment/:id/edit',
+    name: 'Edit Assignment',
+    protected: true,
+    component: EditAssignment,
     layout: AppLayout,
   },
   { path: '*', name: 'Not Found', component: NotFound, layout: MainLayout, protected: false },

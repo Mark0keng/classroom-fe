@@ -40,7 +40,7 @@ const Navbar = ({ title, locale, theme }) => {
   };
 
   const goHome = () => {
-    navigate('/');
+    navigate('/course');
   };
 
   return (
