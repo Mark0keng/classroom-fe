@@ -28,6 +28,9 @@ function* doSubmitAssignment({ payload, cbFailed }) {
   yield put(setLoading(true));
   try {
     yield call(submitStudentAssignment, payload);
+
+    const res = yield call(getStudentAssignment, payload.student_id, payload.assignment_id);
+    yield put(setFileSubmit(res.data.fileSubmit));
   } catch (error) {
     if (error?.response?.data?.output?.payload) {
       cbFailed && cbFailed(error.response.data.output.payload);

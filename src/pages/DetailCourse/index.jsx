@@ -10,9 +10,9 @@ import { selectProfile } from '@containers/Client/selectors';
 import { deleteCourse, getCourseAssignment } from './actions';
 import { selectAssignments, selectCourse } from './selector';
 import PostCard from './components/PostCard/PostCard';
+import EditCourse from './components/EditCourse';
 
 import classes from './style.module.scss';
-import EditCourse from '@pages/Course/components/EditCourse';
 
 const DetailCourse = ({ profile, assignments, course }) => {
   const [error, setError] = useState('');
@@ -103,7 +103,7 @@ const DetailCourse = ({ profile, assignments, course }) => {
           </Menu>
         </div>
       </div>
-      <EditCourse course={course} open={openDialog} onClose={handleOpenDialog} />
+      <EditCourse course={course} isOpen={openDialog} onClose={handleOpenDialog} />
       <Dialog
         onClose={handleModalClose}
         open={open}

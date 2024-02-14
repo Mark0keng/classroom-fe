@@ -1,6 +1,6 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 import { setLoading } from '@containers/App/actions';
-import { deleteCourse, getCourseAssignment, getCourseByCode, updateCourse } from '@domain/api';
+import { deleteCourse, getCourseAssignment, getCourseByCode, getCourseById, updateCourse } from '@domain/api';
 import { DELETE_COURSE, EDIT_COURSE, GET_COURSE_ASSIGNMENT } from './constants';
 import { setCourse, setCourseAssignment } from './actions';
 
@@ -9,6 +9,7 @@ function* doGetCourseAssignment({ courseCode, cbFailed }) {
   try {
     const course = yield call(getCourseByCode, courseCode);
     yield put(setCourse(course.data));
+
     const response = yield call(getCourseAssignment, course.data.id);
     yield put(setCourseAssignment(response.data));
   } catch (error) {
@@ -28,10 +29,14 @@ function* doDeleteCourse({ courseId, cbSuccess }) {
   yield put(setLoading(false));
 }
 
-function* doEditCourse({ payload, courseId, cbSuccess }) {
+function* doEditCourse({ payload, courseCode, cbSuccess }) {
   yield put(setLoading(true));
   try {
-    yield call(updateCourse, payload, courseId);
+    const course = yield call(getCourseByCode, courseCode);
+    yield call(updateCourse, payload, course.data.id);
+
+    const newCourse = yield call(getCourseByCode, courseCode);
+    yield put(setCourse(newCourse.data));
     cbSuccess && cbSuccess();
   } catch (error) {
     /* empty */

@@ -9,6 +9,7 @@ const urls = {
   register: 'register',
   createCourse: 'course/create',
   getCourseByCode: 'course',
+  getCourseById: 'course',
   updateCourse: 'course/update',
   deleteCourse: 'course/delete',
   getCourseMember: 'course',
@@ -51,6 +52,7 @@ export const login = (payload) => callAPI(urls.login, 'post', {}, {}, payload);
 export const register = (payload) => callAPI(urls.register, 'post', {}, {}, payload);
 export const joinCourse = (payload) => callAPI(urls.joinCourse, 'post', {}, {}, payload);
 export const createCourse = (payload) => callAPI(urls.createCourse, 'post', {}, {}, payload);
+export const getCourseById = (courseId) => callAPI(`${urls.getCourseById}/${courseId}`, 'get');
 export const getCourseByCode = (courseCode) => callAPI(`${urls.getCourseByCode}/${courseCode}`, 'get');
 export const updateCourse = (payload, courseId) => callAPI(`${urls.updateCourse}/${courseId}`, 'put', {}, {}, payload);
 export const deleteCourse = (courseId) => callAPI(`${urls.deleteCourse}/${courseId}`, 'delete');

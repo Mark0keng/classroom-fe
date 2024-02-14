@@ -1,5 +1,5 @@
 import { SET_COURSE } from '@pages/Course/constants';
-import { DELETE_COURSE, GET_COURSE_ASSIGNMENT, SET_COURSE_ASSIGNMENT } from './constants';
+import { DELETE_COURSE, EDIT_COURSE, GET_COURSE_ASSIGNMENT, SET_COURSE_ASSIGNMENT } from './constants';
 
 export const setCourseAssignment = (assignments) => ({
   type: SET_COURSE_ASSIGNMENT,
@@ -17,10 +17,10 @@ export const getCourseAssignment = (courseCode, cbFailed) => ({
   cbFailed,
 });
 
-export const editCourse = (payload, courseId, cbSuccess) => ({
-  type: DELETE_COURSE,
+export const editCourse = (payload, courseCode, cbSuccess) => ({
+  type: EDIT_COURSE,
   payload,
-  courseId,
+  courseCode,
   cbSuccess,
 });
 
